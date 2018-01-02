@@ -2,14 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import 'bulma/bulma.sass'
+import "./components/ShogiPlayer.sass" // Rails 側で sp_assets_dir を変更してから読み込みたいので .vue の中では読まないようにする
 
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   template: '<App/>',
   components: { App }
 })

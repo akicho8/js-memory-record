@@ -1,0 +1,31 @@
+.shogi-player
+  .piece_stand_outer
+    @extend %text_select_disable
+    margin: 0 $sp_margin
+    text-align: left
+
+    &.location_white
+      @extend %dom_flip
+      
+    // .location_mark      
+    //   font-size: 50px ! important
+    //   text-shadow: 5px 5px 1px #999999
+      
+    &.turn_active
+      .location_mark
+        text-shadow: 0 0 1rem hsl(0, 50%, 50%)
+
+    // &.development
+    //   border: 2px solid $sp_simple_grid_color
+    //   background: $sp_simple_board_bg
+    //   border-radius: 0.5vmin
+    ul
+      li
+        // 歩(2) の並びを横軸中央で揃える
+        display: flex
+        align-items: center
+        color: $sp_simple_piece_color // 持駒色
+
+        // 持駒数
+        .piece_count
+          vertical-align: middle

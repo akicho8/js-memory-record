@@ -1,0 +1,125 @@
+.shogi-player
+  [v-cloak]
+    display: none
+  
+  font-family: "YuMincho", "Yu Mincho", serif
+
+  margin: 0 auto
+  text-align: center
+
+  // 将棋盤と駒台の反転
+  .flippable
+    transform: rotate(0deg)
+    transition: all 0.2s 0s ease-in-out
+    &.flip
+      @extend %dom_flip
+
+  // 駒台と将棋盤のレイアウト
+  .board_container
+    display: flex
+    // すべてを中央よせ
+    justify-content: center
+
+    // △の駒台は左上
+    // 将棋盤は上下の中央
+    // ▲の駒台は右下
+    .flex_item:nth-child(1)
+      align-self: flex-start
+    .flex_item:nth-child(2)
+      align-self: center
+    .flex_item:nth-child(3)
+      // align-self: flex-end
+      display: flex
+      // 縦並び
+      flex-direction: column
+      // 空白を空けて上下に配置
+      justify-content: space-between
+
+  .board_wrap
+
+      // .mark
+      //   position: absolute
+      //   z-index: 3
+      //   top: (100% / 3)
+      //   left: (100% / 3)
+      //   width: 5px
+      //   height: 5px
+      //   background: $sp_simple_grid_color
+
+      // 将棋盤
+      .board_outer
+        .board_inner
+          margin: 0 auto
+          padding: 0
+
+          // 横セルを均等に分割する
+          table-layout: fixed
+
+          // 盤面の駒(テキスト)を連打やドラッグの際に選択できないようにする
+          @extend %text_select_disable
+
+          // box-shadow: 0 0 1vmin rgba($sp_simple_grid_color, 0.5)
+
+          .piece_outer
+            // transition: all 0.5s ease-out
+            text-align: center
+            &.location_black
+              vertical-align: bottom
+            &.location_white
+              vertical-align: top
+            &.current, &.origin_place
+            .piece_inner
+              display: inline-block
+
+  .piece_outer
+    cursor: default     // テキスト選択「I」ではな矢印カーソルとする
+    &:hover
+      &.selectable_p
+        cursor: pointer
+              
+  // piece_inner の外側にある piece_inner をずらすための dom
+  .piece_inner_wrap
+    width: 100%
+    height: 100%
+        
+  // コントローラー
+  .controller_block
+    margin-top: 1vmin
+    button
+      &.next
+        width: 16vmin
+
+  // スライダー
+  .turn_slider
+    margin-left: auto
+    margin-right: auto
+    cursor: pointer
+    width: 37vmin
+
+  .turn_div
+    // テキストを選択できないようにする
+    @extend %text_select_disable
+    // N手目の編集モードのnumberフィールド
+    .turn_edit_input
+      width: 3rem
+    // N手目のテキスト表示
+    .turn_edit_text
+      cursor: pointer
+
+  // 幅が狭いときでも折り返す
+  .sfen_area
+    word-break: break-all
+
+  // .piece_name
+  //   &.piece_P
+  //     background: blue
+  .comment_area
+
+  .edit_mode_controller
+    display: inline-block
+    text-align: left
+    margin: 1vmin auto
+
+  // SettingModal を起動する「…」
+  .modal_trigger_dots
+    cursor: pointer

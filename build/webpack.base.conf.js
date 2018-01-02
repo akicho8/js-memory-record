@@ -22,7 +22,8 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    // shogi_player: './src/components/ShogiPlayer.vue',
   },
   output: {
     path: config.build.assetsRoot,
@@ -41,6 +42,10 @@ module.exports = {
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
+      {
+        test: /\.(txt|md|kif|ki2|csa|sfen)$/,
+        use: 'raw-loader',
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -74,7 +79,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
     ]
   },
   node: {

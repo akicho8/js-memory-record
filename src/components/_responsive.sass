@@ -1,0 +1,11 @@
+// iPhone5 は横320px
+@media screen and (max-width: $sp_mobile_width)
+  .shogi-player
+    .board_outer
+      .board_inner
+        .piece_inner
+          padding: 0 0.75vmin
+          &.location_black
+            transform: translateY(0)
+          &.location_white
+            transform: rotate(180deg) translateY(0)

@@ -1,0 +1,32 @@
+.shogi-player
+  &.run_mode-view_mode
+    .board_wrap
+      position: relative
+      .overlay_navi
+        position: absolute
+        z-index: 1
+        width: 75%
+        height: 100%
+        // ←戻る
+        &.previous
+          left: -25%
+        // 進む→
+        &.next
+          right: -25%
+        // 反転用の天王山
+        &.flip_trigger_cell
+          z-index: 2
+          left: 50% - ((100% / $sp_dimension) / 2)
+          width: (100% / $sp_dimension)
+          top: 50% - ((100% / $sp_dimension) / 2)
+          height: (100% / $sp_dimension)
+      // .mark
+      //   position: absolute
+      //   z-index: 3
+      //   top: (100% / 3)
+      //   left: (100% / 3)
+      //   width: 5px
+      //   height: 5px
+      //   background: $sp_simple_grid_color
+
+    -webkit-tap-highlight-color: transparent
