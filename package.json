@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "A simple library that handles a few records easily",
   "keywords": "memory record small library",
-  "homepage": "https://github.com/akicho8/js-memory-record/",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
   "main": "src/memory_record.js",
   "private": false,
+  "homepage": "https://github.com/akicho8/js-memory-record/",
+  "bugs": { "url": "http://github.com/akicho8/js-memory-record/issues", "email": "pinpon.ikeda@gmail.com"},
+  "repository": { "type": "git", "url": "git@github.com:akicho8/js-memory-record.git"},
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
@@ -15,7 +17,7 @@
     "lint": "eslint --ext .js src test/unit/specs",
     "build:clean": "rimraf dist",
     "build": "npm run build:clean && node build/build.js",
-    "release": "npm version patch && npm publish"
+    "release": "npm test && npm build && npm version patch && npm publish"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

@@ -13,7 +13,7 @@ script:
   - npm test
 addons:
   code_climate:
-    repo_token: f147df85a17a09bed8704ba2a3172b9a45519d0adb385b689bc2a323222f0efd
+    repo_token: 9c5ae1de2fd177779f491a14e2ed72125a9a0bab06a926ad69371b99b4129bfd
   apt:
     sources:
       - google-chrome
