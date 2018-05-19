@@ -39,8 +39,6 @@ module.exports = {
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
-
-    cssSourceMap: true,
   },
 
   build: {
@@ -50,7 +48,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/shogi-player/',       // for github pages
+    assetsPublicPath: '/js-memory-record/',       // for github pages
 
     /**
      * Source Maps
@@ -65,7 +63,7 @@ module.exports = {
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
-    productionGzipExtensions: ['js', 'css'],
+    productionGzipExtensions: ['js'],
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
