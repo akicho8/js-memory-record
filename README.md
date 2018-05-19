@@ -84,9 +84,24 @@ Fruit.fetch("apple").half_price // => 60
 
 ### Unknown Key Access
 
+There is no `lookup()` exception.
+
 ```js
 Fruit.lookup("grape")           // => null
-Fruit.fetch("grape")            // => Throw Error Exception
+```
+
+In case of `fetch()` we will throw an exception.
+
+```js
+Fruit.fetch("grape")            // (Throw Error)
+```
+
+The error message of the exception is displayed as follows.
+
+```text
+Error: Fruit.fetch("grape") does not match anything
+keys: ["melon","apple","peach"]
+codes: [0,1,2]
 ```
 
 ### Array Access
