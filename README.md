@@ -6,29 +6,21 @@
 [![npm version](https://badge.fury.io/js/js-memory-record.svg)](https://badge.fury.io/js/js-memory-record)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fjs-memory-record.svg)](https://badge.fury.io/gh/akicho8%2Fjs-memory-record)
 
-## Build Setup
+## Install
 
-```bash
-# install dependencies
-npm install
+```shell
+npm install js-memory-record
+```
 
-# serve with hot reload at localhost:8080
-npm run dev
+or
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
+```shell
+yarn add js-memory-record
 ```
 
 ## How To Use
+
+### Define
 
 ```javascript
 import { MemoryRecord } from 'memory_record'
@@ -57,35 +49,64 @@ class Fruit extends MemoryRecord {
     return Math.ceil(this.price / 2)
   }
 }
+```
 
-// Key Access
+### Key Access
 
+```javascript
 Fruit.fetch("peach").key        // => "peach"
 Fruit.fetch("peach").name       // => "もも"
 Fruit.fetch("peach").code       // => 1
+```
 
-// Code Access
-// code is something like database ID. Allocate in order from 0.
+### Code Access
 
+Code is something like database ID.
+Allocate in order from 0.
+
+```javascript
 Fruit.fetch(1).code             // => 1
 Fruit.fetch(1).key              // => "peach"
+```
 
-// Accessible as it was defined separately
+### Accessible as it was defined separately
 
+```javascript
 Fruit.fetch("peach").price      // => 200
 Fruit.fetch("peach").half_price // => 100
+```
 
-// Unknown key
+### Unknown key access
 
+```javascript
 Fruit.lookup("grape")           // => null
-Fruit.fetch("grape")            // => Error
+Fruit.fetch("grape")            // => Throw Error Exception
+```
 
-// Unknown key
+### Array access
 
-Fruit.lookup("grape")           // => null
-Fruit.fetch("grape")            // => Error
-
-// Array access
-
+```javascript
 Fruit.values                    // [{...}, {...}, {...}]
+```
+
+## Build Setup
+
+```bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run all tests
+npm test
 ```
