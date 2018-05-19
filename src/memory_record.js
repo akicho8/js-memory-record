@@ -46,7 +46,11 @@ class MemoryRecord {
   static fetch(key) {
     const element = this.lookup(key)
     if (!element) {
-      throw new Error(`Key not found: ${key}`)
+      throw new Error([
+        `${this.name}.fetch(${JSON.stringify(key)}) does not match anything`,
+        `keys: ${JSON.stringify(this.keys)}`,
+        `codes: ${JSON.stringify(this.codes)}`,
+      ].join("\n"))
     }
     return element
   }
@@ -57,6 +61,16 @@ class MemoryRecord {
       return a
     }, {})
     return this._values_map
+  }
+
+  static get keys() {
+    this._keys = this._keys || Object.keys(this.values_map)
+    return this._keys
+  }
+
+  static get codes() {
+    this._codes = this._codes || this.values.map(e => e.code)
+    return this._codes
   }
 
   static get values() {
@@ -96,4 +110,8 @@ if (process.argv[1] === __filename) {
   console.log(MemoryRecord.lookup(2))
 
   console.log(MemoryRecord.values[0] === MemoryRecord.values[0])
+
+  console.log(MemoryRecord.values.map(e => e.key))
+  console.log(Object.keys(MemoryRecord.values_map))
+  console.log(MemoryRecord.fetch('unknown'))
 }

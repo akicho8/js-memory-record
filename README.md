@@ -22,11 +22,13 @@ or
 yarn add js-memory-record
 ```
 
-## How To Use
+## Example
 
-### Define
+### Records Define
 
-```javascript
+Return an array of Hash structures in `define()`
+
+```js
 import { MemoryRecord } from 'memory_record'
 
 class Fruit extends MemoryRecord {
@@ -55,43 +57,55 @@ class Fruit extends MemoryRecord {
 }
 ```
 
-### Key Access
+### fetch(key) - Key Access
 
-```javascript
+```js
 Fruit.fetch("apple").key        // => "apple"
 Fruit.fetch("apple").name       // => "りんご"
 Fruit.fetch("apple").code       // => 1
 ```
 
-### Code Access
+### fetch(code) - Code Access
 
 Code is something like database ID.
 Allocate in order from 0.
 
-```javascript
+```js
 Fruit.fetch(1).code             // => 1
 Fruit.fetch(1).key              // => "apple"
 ```
 
-### Additional Defined Methods
+### Additional Defined Instance Methods
 
-```javascript
+```js
 Fruit.fetch("apple").price      // => 120
 Fruit.fetch("apple").half_price // => 60
 ```
 
 ### Unknown Key Access
 
-```javascript
+```js
 Fruit.lookup("grape")           // => null
 Fruit.fetch("grape")            // => Throw Error Exception
 ```
 
 ### Array Access
 
-```javascript
+```js
 Fruit.values                    // [{...}, {...}, {...}]
+Fruit.values.map(e => e.name)   // ["melon", "apple", "peach"]
 ```
+
+### Other Class Methods
+
+```js
+Fruit.keys                      // ["melon", "apple", "peach"]
+Fruit.codes                     // [0, 1, 2]
+```
+
+## TODO
+
+- Do not overwrite code if there is definition of code
 
 ## Build Setup
 
