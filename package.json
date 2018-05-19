@@ -1,5 +1,5 @@
 {
-  "name": "memory-record",
+  "name": "js-memory-record",
   "version": "0.0.1",
   "description": "A simple library that handles a few records easily",
   "keywords": "memory record small library",
