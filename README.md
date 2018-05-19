@@ -1,4 +1,4 @@
-# js-memory-record
+# MemoryRecord
 
 [![Build Status](https://travis-ci.org/akicho8/js-memory-record.svg?branch=master)](https://travis-ci.org/akicho8/js-memory-record)
 [![Maintainability](https://api.codeclimate.com/v1/badges/010e25e22f84080afe2d/maintainability)](https://codeclimate.com/github/akicho8/js-memory-record/maintainability)
@@ -47,11 +47,11 @@ class Fruit extends MemoryRecord {
   // Define an instance method referencing an attribute.
   // Define it when accessing other than key, name, code.
 
-  static get price() {
+  get price() {
     return this.attributes["price"]
   }
 
-  static get half_price() {
+  get half_price() {
     return Math.ceil(this.price / 2)
   }
 }
