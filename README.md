@@ -59,6 +59,8 @@ class Fruit extends MemoryRecord {
 
 ### fetch(key) - Key Access
 
+Basic access by this method.
+
 ```js
 Fruit.fetch("apple").key        // => "apple"
 Fruit.fetch("apple").name       // => "りんご"
@@ -69,6 +71,7 @@ Fruit.fetch("apple").code       // => 1
 
 Code is something like database ID.
 Allocate in order from 0.
+Use it when you want to access by special index.
 
 ```js
 Fruit.fetch(1).code             // => 1
@@ -76,6 +79,8 @@ Fruit.fetch(1).key              // => "apple"
 ```
 
 ### Additional Defined Instance Methods
+
+Define the Instance Metod freely and return the attributes in an easy-to-use form. This part is one of the merits of introducing this library.
 
 ```js
 Fruit.fetch("apple").price      // => 120
@@ -104,10 +109,15 @@ keys: ["melon","apple","peach"]
 codes: [0,1,2]
 ```
 
+The cause of the error is displayed in an easy-to-understand manner.
+
 ### Array Access
 
 ```js
 Fruit.values                    // [{...}, {...}, {...}]
+```
+
+```js
 Fruit.values.map(e => e.name)   // ["melon", "apple", "peach"]
 ```
 
@@ -117,6 +127,8 @@ Fruit.values.map(e => e.name)   // ["melon", "apple", "peach"]
 Fruit.keys                      // ["melon", "apple", "peach"]
 Fruit.codes                     // [0, 1, 2]
 ```
+
+We do not use this class methods much. But it may be useful for debugging.
 
 ## TODO
 
