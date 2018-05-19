@@ -6,6 +6,10 @@
 [![npm version](https://badge.fury.io/js/js-memory-record.svg)](https://badge.fury.io/js/js-memory-record)
 [![GitHub version](https://badge.fury.io/gh/akicho8%2Fjs-memory-record.svg)](https://badge.fury.io/gh/akicho8%2Fjs-memory-record)
 
+## Description
+
+A simple library that handles a few records easily.
+
 ## Install
 
 ```shell
@@ -32,9 +36,9 @@ class Fruit extends MemoryRecord {
 
   static get define() {
     return [
+      { key: "melon",  name: "メロン", price: 800, },
       { key: "apple",  name: "りんご", price: 120, },
       { key: "peach",  name: "もも",   price: 200, },
-      { key: "melon",  name: "メロン", price: 800, },
     ]
   }
 
@@ -54,9 +58,9 @@ class Fruit extends MemoryRecord {
 ### Key Access
 
 ```javascript
-Fruit.fetch("peach").key        // => "peach"
-Fruit.fetch("peach").name       // => "もも"
-Fruit.fetch("peach").code       // => 1
+Fruit.fetch("apple").key        // => "apple"
+Fruit.fetch("apple").name       // => "りんご"
+Fruit.fetch("apple").code       // => 1
 ```
 
 ### Code Access
@@ -66,24 +70,24 @@ Allocate in order from 0.
 
 ```javascript
 Fruit.fetch(1).code             // => 1
-Fruit.fetch(1).key              // => "peach"
+Fruit.fetch(1).key              // => "apple"
 ```
 
-### Accessible as it was defined separately
+### Additional Defined Methods
 
 ```javascript
-Fruit.fetch("peach").price      // => 200
-Fruit.fetch("peach").half_price // => 100
+Fruit.fetch("apple").price      // => 120
+Fruit.fetch("apple").half_price // => 60
 ```
 
-### Unknown key access
+### Unknown Key Access
 
 ```javascript
 Fruit.lookup("grape")           // => null
 Fruit.fetch("grape")            // => Throw Error Exception
 ```
 
-### Array access
+### Array Access
 
 ```javascript
 Fruit.values                    // [{...}, {...}, {...}]
