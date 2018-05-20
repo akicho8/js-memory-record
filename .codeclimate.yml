@@ -2,7 +2,5 @@ ratings:
   paths:
     - src/**/*.js
 exclude_paths:
-  - build/**/*
-  - config/**/*
-  - dist/**/*
+  - lib/**/*
   - test/**/*

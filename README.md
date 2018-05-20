@@ -29,7 +29,7 @@ yarn add js-memory-record
 Return an array of Hash structures in `define()`
 
 ```js
-import { MemoryRecord } from 'memory_record'
+import { MemoryRecord } from 'js-memory-record'
 
 class Fruit extends MemoryRecord {
 
