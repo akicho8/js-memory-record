@@ -17,7 +17,7 @@
   "scripts": {
     "test": "jest --config test/jest.conf.js --coverage",
     "build": "rimraf lib && babel src -d lib --source-maps --no-comments",
-    "release": "npm test && npm run build && npm version patch && git push --tags && npm publish"
+    "release": "npm test && npm run build && npm version patch && git push && git push --tags && npm publish"
   },
   "dependencies": {
     "babel-core": "^6.22.1",
