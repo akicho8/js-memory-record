@@ -9,6 +9,10 @@ class MyModel extends MemoryRecord {
       { key: "bob",   },
     ]
   }
+
+  get double_name() {
+    return [this.name, this.name].join("-")
+  }
 }
 
 describe('MemoryRecord', () => {
@@ -28,5 +32,17 @@ describe('MemoryRecord', () => {
 
   it('name', () => {
     expect(MyModel.values[0].name).toEqual("alice")
+  })
+
+  it('code', () => {
+    expect(MyModel.values[0].code).toEqual(0)
+  })
+
+  it('instance methods', () => {
+    expect(MyModel.values[0].double_name).toEqual("alice-alice")
+  })
+
+  it('attributes', () => {
+    expect(MyModel.values[0].attributes).toEqual({code: 0, key: "alice"})
   })
 })

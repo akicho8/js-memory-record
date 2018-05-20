@@ -79,39 +79,61 @@ class MemoryRecord {
   }
 
   constructor(attributes) {
-    this.attributes = attributes
+    Object.defineProperty(this, "attributes", {value: attributes, writable: false, enumerable: false, configurable: false})
+
+    _.forIn(attributes, (e, k) => {
+      Object.defineProperty(this, k, {value: e, writable: false, enumerable: true, configurable: false})
+    })
+
+    if (!this.hasOwnProperty("name")) {
+      Object.defineProperty(this, "name", {value: attributes.name || this.key.toString(), writable: false, enumerable: true, configurable: false})
+    }
   }
 
-  get key() {
-    return this.attributes.key
-  }
+  // get code() {
+  //   return this.attributes.code
+  // }
 
-  get name() {
-    return this.attributes.name || this.key.toString()
-  }
+  // get key() {
+  //   return this.attributes.key
+  // }
 
-  get code() {
-    return this.attributes.code
-  }
+  // get name() {
+  //   return this.attributes.name || this.key.toString()
+  // }
 }
 
 export { MemoryRecord }
 
 if (process.argv[1] === __filename) {
-  console.log(MemoryRecord.values)
-  console.log(MemoryRecord.lookup("(key_x)").name)
-  console.log(MemoryRecord.lookup("(key_x)").code)
+  class Foo extends MemoryRecord {
+    static get define() {
+      return [
+        { key: "black", name: '☗', },
+        { key: "white", name: '☖', },
+      ]
+    }
+  }
 
-  let v = MemoryRecord.lookup("(key_x)")
-  console.log(v instanceof MemoryRecord)
+  const record = Foo.values[0]
+  console.log(record.key)
+  console.log(record.code)
+  console.log(record.name)
 
-  console.log(MemoryRecord.lookup(0))
-  console.log(MemoryRecord.lookup(1))
-  console.log(MemoryRecord.lookup(2))
+  console.log(Foo.values)
+  console.log(Foo.lookup("black").name)
+  console.log(Foo.lookup("black").code)
 
-  console.log(MemoryRecord.values[0] === MemoryRecord.values[0])
+  let v = Foo.lookup("black")
+  console.log(v instanceof Foo)
 
-  console.log(MemoryRecord.values.map(e => e.key))
-  console.log(Object.keys(MemoryRecord.values_map))
-  console.log(MemoryRecord.fetch('unknown'))
+  console.log(Foo.lookup(0))
+  console.log(Foo.lookup(1))
+  console.log(Foo.lookup(2))
+
+  console.log(Foo.values[0] === Foo.values[0])
+
+  console.log(Foo.values.map(e => e.key))
+  console.log(Object.keys(Foo.values_map))
+  console.log(Foo.fetch('unknown'))
 }

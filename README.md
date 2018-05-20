@@ -45,16 +45,14 @@ class Fruit extends MemoryRecord {
   }
 
   // Define an instance method referencing an attribute.
-  // Define it when accessing other than key, name, code.
-
-  get price() {
-    return this.attributes["price"]
-  }
+  // Define it when accessing other than key, name and other attributes
 
   get half_price() {
     return Math.ceil(this.price / 2)
   }
 }
+
+export { Fruit }
 ```
 
 ### fetch(key) - Key Access
@@ -78,12 +76,17 @@ Fruit.fetch(1).code             // => 1
 Fruit.fetch(1).key              // => "apple"
 ```
 
+### Attributes can be referred to as properties
+
+```js
+Fruit.fetch("apple").price      // => 120
+```
+
 ### Additional Defined Instance Methods
 
 Define the Instance Metod freely and return the attributes in an easy-to-use form. This part is one of the merits of introducing this library.
 
 ```js
-Fruit.fetch("apple").price      // => 120
 Fruit.fetch("apple").half_price // => 60
 ```
 
