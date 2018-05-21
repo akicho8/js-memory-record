@@ -24,12 +24,7 @@ import _ from "lodash"
 
 class MemoryRecord {
   static get define() {
-    console.warn("not implemented")
-
-    return [
-      { key: "(key_x)", },
-      { key: "(key_y)", },
-    ]
+    throw new Error(`${this.name}.define() is not implemented`)
   }
 
   static lookup(key) {
@@ -89,18 +84,6 @@ class MemoryRecord {
       Object.defineProperty(this, "name", {value: attributes.name || this.key.toString(), writable: false, enumerable: true, configurable: false})
     }
   }
-
-  // get code() {
-  //   return this.attributes.code
-  // }
-
-  // get key() {
-  //   return this.attributes.key
-  // }
-
-  // get name() {
-  //   return this.attributes.name || this.key.toString()
-  // }
 }
 
 export { MemoryRecord }

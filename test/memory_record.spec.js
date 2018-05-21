@@ -15,6 +15,9 @@ class MyModel extends MemoryRecord {
   }
 }
 
+class EmptyModel extends MemoryRecord {
+}
+
 describe('MemoryRecord', () => {
   it('lookup', () => {
     expect(MyModel.lookup("alice").key).toEqual("alice")
@@ -44,5 +47,9 @@ describe('MemoryRecord', () => {
 
   it('attributes', () => {
     expect(MyModel.values[0].attributes).toEqual({code: 0, key: "alice"})
+  })
+
+  it('EmptyModel', () => {
+    expect(() => { EmptyModel.values }).toThrow()
   })
 })
