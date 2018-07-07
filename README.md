@@ -145,7 +145,7 @@ Fruit.values                    // => [{...}, {...}, {...}]
 ```
 
 ```js
-Fruit.values.map(e => e.name)   // => ["apple", "melon", "peach"]
+Fruit.values.map(e => e.key)    // => ["apple", "melon", "peach"]
 ```
 
 ### Other Class Methods
