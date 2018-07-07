@@ -22,7 +22,7 @@ or
 yarn add js-memory-record
 ```
 
-### Simplest example
+### Simplest Example
 
 ```js
 class Gender extends MemoryRecord {
