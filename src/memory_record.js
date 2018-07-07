@@ -32,9 +32,9 @@ class MemoryRecord {
       return key
     }
     if (typeof key === "number") {
-      return this.values[key]
+      return this.codes_hash[key]
     } else {
-      return this.values_map[key]
+      return this.keys_hash[key]
     }
   }
 
@@ -50,27 +50,63 @@ class MemoryRecord {
     return element
   }
 
-  static get values_map() {
-    this._values_map = this._values_map || _.reduce(this.define, (a, e, i) => { // http://devdocs.io/lodash~4/index#reduce
-      a[e.key] = Object.freeze(new this(Object.assign({}, e, {code: i})))
+  static get values() {
+    return this._values || _.map(this.define, (e, i) => {
+      e = Object.assign({}, e, {index: i})
+      if (!("code" in e)) {
+        e = Object.assign({}, e, {code: i})
+      }
+      if (!("key" in e)) {
+        e = Object.assign({}, e, {key: `_key${i}`})
+      }
+      return Object.freeze(new this(e))
+    })
+  }
+
+  static get keys_hash() {
+    this._keys_hash = this._keys_hash || _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
+      if (e.key in a) {
+        throw new Error([
+          `${this.name}#key ${JSON.stringify(e.key)} is duplicate`,
+          `Existing: ${JSON.stringify(Object.keys(a))}`,
+          `Conflict: ${JSON.stringify(e)}`,
+        ].join("\n"))
+      }
+      a[e.key] = e
       return a
     }, {})
-    return this._values_map
+    return this._keys_hash
+  }
+
+  static get codes_hash() {
+    this._codes_hash = this._codes_hash || _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
+      if (e.code in a) {
+        throw new Error([
+          `${this.name}#code ${JSON.stringify(e.code)} is duplicate`,
+          `Existing: ${JSON.stringify(Object.keys(a))}`,
+          `Conflict: ${JSON.stringify(e)}`,
+        ].join("\n"))
+      }
+      a[e.code] = e
+      return a
+    }, {})
+    return this._codes_hash
   }
 
   static get keys() {
-    this._keys = this._keys || Object.keys(this.values_map)
+    this._keys = this._keys || Object.keys(this.keys_hash)
     return this._keys
   }
 
   static get codes() {
+    // In case of Object.keys(this.codes_hash) code becomes a character string
     this._codes = this._codes || this.values.map(e => e.code)
     return this._codes
   }
 
-  static get values() {
-    this._values = this._values || Object.values(this.values_map)
-    return this._values
+  static get names() {
+    this._names = this._names || this.values.map(e => e.name)
+    return this._names
   }
 
   constructor(attributes) {
@@ -80,8 +116,10 @@ class MemoryRecord {
       Object.defineProperty(this, k, {value: e, writable: false, enumerable: true, configurable: false})
     })
 
-    if (!this.hasOwnProperty("name")) {
-      Object.defineProperty(this, "name", {value: attributes.name || this.key.toString(), writable: false, enumerable: true, configurable: false})
+    // If name is not defined, it returns string converted from key
+    // In the case of this.hasOwnProperty ("name") see parents. Parents also look at in.
+    if (!("name" in this)) {
+      Object.defineProperty(this, "name", {value: attributes.name || attributes.key.toString(), writable: false, enumerable: true, configurable: false})
     }
   }
 }
@@ -94,9 +132,13 @@ if (process.argv[1] === __filename) {
       return [
         { key: "black", name: '☗', },
         { key: "white", name: '☖', },
+        { code: 7, },
       ]
     }
   }
+
+  console.log(Foo.keys)
+  console.log(Foo.codes)
 
   const record = Foo.values[0]
   console.log(record.key)
@@ -106,6 +148,8 @@ if (process.argv[1] === __filename) {
   console.log(Foo.values)
   console.log(Foo.lookup("black").name)
   console.log(Foo.lookup("black").code)
+
+  console.log(Foo.lookup("_key2").name)
 
   let v = Foo.lookup("black")
   console.log(v instanceof Foo)
@@ -117,6 +161,6 @@ if (process.argv[1] === __filename) {
   console.log(Foo.values[0] === Foo.values[0])
 
   console.log(Foo.values.map(e => e.key))
-  console.log(Object.keys(Foo.values_map))
+  console.log(Object.keys(Foo.keys_hash))
   console.log(Foo.fetch('unknown'))
 }

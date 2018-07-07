@@ -7,6 +7,7 @@ class MyModel extends MemoryRecord {
     return [
       { key: "alice", },
       { key: "bob",   },
+      { code: 7,      },
     ]
   }
 
@@ -23,6 +24,24 @@ describe('MemoryRecord', () => {
     expect(MyModel.lookup("alice").key).toEqual("alice")
     expect(MyModel.lookup(0).key).toEqual("alice")
     expect(MyModel.lookup(-1)).toEqual(undefined)
+  })
+
+  it('Automatic assignment', () => {
+    const r = MyModel.lookup(7)
+    expect(r.key).toEqual("_key2")
+    expect(r.name).toEqual("_key2")
+  })
+
+  it('keys', () => {
+    expect(MyModel.keys).toEqual(["alice", "bob", "_key2"])
+  })
+
+  it('codes', () => {
+    expect(MyModel.codes).toEqual([0, 1, 7])
+  })
+
+  it('names', () => {
+    expect(MyModel.names).toEqual(["alice", "bob", "_key2"])
   })
 
   it('fetch', () => {
@@ -46,7 +65,7 @@ describe('MemoryRecord', () => {
   })
 
   it('attributes', () => {
-    expect(MyModel.values[0].attributes).toEqual({code: 0, key: "alice"})
+    expect(MyModel.values[0].attributes).toEqual({code: 0, key: "alice", index: 0})
   })
 
   it('EmptyModel', () => {

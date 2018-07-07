@@ -22,7 +22,26 @@ or
 yarn add js-memory-record
 ```
 
-## Example
+### Simplest example
+
+```js
+class Gender extends MemoryRecord {
+  static get define() {
+    return [
+      { key: "male"   },
+      { key: "female" },
+    ]
+  }
+}
+
+gender = Gender.fetch("male")
+gender.name          // => "male"
+gender.code          // => 0
+
+Gender.fetch(0).name // => "male"
+```
+
+## More Example
 
 ### Records Define
 
@@ -38,16 +57,20 @@ class Fruit extends MemoryRecord {
 
   static get define() {
     return [
-      { key: "melon",  name: "メロン", price: 800, },
-      { key: "apple",  name: "りんご", price: 120, },
-      { key: "peach",  name: "もも",   price: 200, },
+      { key: "apple",  name: "Poison Apple", price: 120, },
+      { key: "melon",  name: "Green Melon",  price: 800, },
+      { key: "peach",  name: "Pink Piece",   price: 200, },
     ]
   }
 
   // Define an instance method referencing an attribute.
   // Define it when accessing other than key, name and other attributes
 
-  get half_price() {
+  get full_name() {
+    return `${this.name} (Now ${this.special_price} Gold)`
+  }
+
+  get special_price() {
     return Math.ceil(this.price / 2)
   }
 }
@@ -61,8 +84,9 @@ Basic access by this method.
 
 ```js
 Fruit.fetch("apple").key        // => "apple"
-Fruit.fetch("apple").name       // => "りんご"
-Fruit.fetch("apple").code       // => 1
+Fruit.fetch("apple").name       // => "Poison Apple"
+Fruit.fetch("apple").code       // => 0
+Fruit.fetch("apple").index      // => 0
 ```
 
 ### fetch(code) - Code Access
@@ -72,8 +96,7 @@ Allocate in order from 0.
 Use it when you want to access by special index.
 
 ```js
-Fruit.fetch(1).code             // => 1
-Fruit.fetch(1).key              // => "apple"
+Fruit.fetch(0).name             // => "Poison Apple"
 ```
 
 ### Attributes can be referred to as properties
@@ -87,7 +110,7 @@ Fruit.fetch("apple").price      // => 120
 Define the Instance Metod freely and return the attributes in an easy-to-use form. This part is one of the merits of introducing this library.
 
 ```js
-Fruit.fetch("apple").half_price // => 60
+Fruit.fetch("apple").special_price // => 60
 ```
 
 ### Unknown Key Access
@@ -117,25 +140,41 @@ The cause of the error is displayed in an easy-to-understand manner.
 ### Array Access
 
 ```js
-Fruit.values                    // [{...}, {...}, {...}]
+Fruit.values                    // => [{...}, {...}, {...}]
 ```
 
 ```js
-Fruit.values.map(e => e.name)   // ["melon", "apple", "peach"]
+Fruit.values.map(e => e.name)   // => ["melon", "apple", "peach"]
 ```
 
 ### Other Class Methods
 
 ```js
-Fruit.keys                      // ["melon", "apple", "peach"]
-Fruit.codes                     // [0, 1, 2]
+Fruit.keys      // => ["apple", "melon", "peach"]
+Fruit.codes     // => [0, 1, 2]
+Fruit.names     // => ["Poison Apple", "Green Melon", "Pink Piece"],
 ```
 
 We do not use this class methods much. But it may be useful for debugging.
 
-## TODO
+### code can be explicitly specified
 
-- Do not overwrite code if there is definition of code
+```js
+static get define() {
+  return [
+    { code: 1, key: "apple",  name: "Poison Apple", price: 120, },
+    { code: 2, key: "melon",  name: "Green Melon",  price: 800, },
+    { code: 4, key: "peach",  name: "Pink Piece",   price: 200, },
+  ]
+}
+```
+
+```js
+Fruit.codes    // => [1, 2, 4]
+```
+
+This is like managing database ID yourself. We do not recommend it.
+It is only useful if you need consistency with old data.
 
 ## Build Setup
 
@@ -147,5 +186,5 @@ npm install
 npm run build
 
 # run unit tests
-npm unit
+npm test
 ```
