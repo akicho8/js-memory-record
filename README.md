@@ -132,7 +132,7 @@ The error message of the exception is displayed as follows.
 
 ```text
 Error: Fruit.fetch("grape") does not match anything
-keys: ["melon","apple","peach"]
+keys: ["apple","melon","peach"]
 codes: [0,1,2]
 ```
 
@@ -145,7 +145,7 @@ Fruit.values                    // => [{...}, {...}, {...}]
 ```
 
 ```js
-Fruit.values.map(e => e.name)   // => ["melon", "apple", "peach"]
+Fruit.values.map(e => e.name)   // => ["apple", "melon", "peach"]
 ```
 
 ### Other Class Methods
@@ -163,9 +163,9 @@ We do not use this class methods much. But it may be useful for debugging.
 ```js
 static get define() {
   return [
-    { code: 1, key: "apple",  name: "Poison Apple", price: 120, },
-    { code: 2, key: "melon",  name: "Green Melon",  price: 800, },
-    { code: 4, key: "peach",  name: "Pink Piece",   price: 200, },
+    { code: 1, key: "apple", },
+    { code: 2, key: "melon", },
+    { code: 4, key: "peach", },
   ]
 }
 ```
