@@ -53,7 +53,6 @@ import { MemoryRecord } from 'js-memory-record'
 class Fruit extends MemoryRecord {
 
    // Record definition.
-   // key is required.
 
   static get define() {
     return [
