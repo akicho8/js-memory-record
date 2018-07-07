@@ -106,10 +106,12 @@ Fruit.fetch("apple").price      // => 120
 
 ### Additional Defined Instance Methods
 
-Define the Instance Metod freely and return the attributes in an easy-to-use form. This part is one of the merits of introducing this library.
+Define the Instance Metod freely and return the attributes in an easy-to-use form.
+This part is one of the merits of introducing this library.
 
 ```js
 Fruit.fetch("apple").special_price // => 60
+Fruit.fetch("apple").full_name     // => "Poison Apple (Now 60 Gold)"
 ```
 
 ### Unknown Key Access
