@@ -52,7 +52,7 @@ import { MemoryRecord } from 'js-memory-record'
 
 class Fruit extends MemoryRecord {
 
-   // Record definition.
+  // Record definition.
 
   static get define() {
     return [
