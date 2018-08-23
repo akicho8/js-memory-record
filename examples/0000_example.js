@@ -1,6 +1,6 @@
 // -*- compile-command: "babel-node 0000_example.js" -*-
 
-import { MemoryRecord } from '../src/memory_record.js'
+import MemoryRecord from '../src/memory_record.js'
 
 class Fruit extends MemoryRecord {
 

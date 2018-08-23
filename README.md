@@ -48,9 +48,9 @@ Gender.fetch(0).name // => "male"
 Return an array of Hash structures in `define()`
 
 ```js
-import { MemoryRecord } from 'js-memory-record'
+import MemoryRecord from 'js-memory-record'
 
-class Fruit extends MemoryRecord {
+export default class Fruit extends MemoryRecord {
 
   // Record definition.
 
@@ -73,8 +73,6 @@ class Fruit extends MemoryRecord {
     return Math.ceil(this.price / 2)
   }
 }
-
-export { Fruit }
 ```
 
 ### fetch(key) - Key Access

@@ -1,6 +1,6 @@
 // Example.
 //
-//   import { MemoryRecord } from "./memory_record"
+//   import MemoryRecord from "./memory_record"
 //
 //   class Foo extends MemoryRecord {
 //     static get define() {
@@ -22,7 +22,7 @@
 
 import _ from "lodash"
 
-class MemoryRecord {
+export default class MemoryRecord {
   static get define() {
     throw new Error(`${this.name}.define() is not implemented`)
   }
@@ -123,8 +123,6 @@ class MemoryRecord {
     }
   }
 }
-
-export { MemoryRecord }
 
 if (process.argv[1] === __filename) {
   class Foo extends MemoryRecord {

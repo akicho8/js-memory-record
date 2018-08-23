@@ -1,6 +1,6 @@
 // -*- compile-command: "jest --config jest.conf.js" -*-
 
-import { MemoryRecord } from '@/memory_record.js'
+import MemoryRecord from '@/memory_record.js'
 
 class MyModel extends MemoryRecord {
   static get define() {
