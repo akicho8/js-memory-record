@@ -27,6 +27,17 @@ export default class MemoryRecord {
     throw new Error(`${this.name}.define() is not implemented`)
   }
 
+  static memory_record_reset(records) {
+    this._values     = undefined
+    this._keys_hash  = undefined
+    this._codes_hash = undefined
+    this._keys       = undefined
+    this._codes      = undefined
+    this._names      = undefined
+
+    this._records = records
+  }
+
   static lookup(key) {
     if (key instanceof this) {
       return key
@@ -51,7 +62,10 @@ export default class MemoryRecord {
   }
 
   static get values() {
-    return this._values || _.map(this.define, (e, i) => {
+    if (this._values !== undefined) {
+      return this._values
+    }
+    this._values = _.map(this.__source_records, (e, i) => {
       e = Object.assign({}, e, {index: i})
       if (!("code" in e)) {
         e = Object.assign({}, e, {code: i})
@@ -61,10 +75,14 @@ export default class MemoryRecord {
       }
       return Object.freeze(new this(e))
     })
+    return this._values
   }
 
   static get keys_hash() {
-    this._keys_hash = this._keys_hash || _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
+    if (this._keys_hash !== undefined) {
+      return this._keys_hash
+    }
+    this._keys_hash = _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
       if (e.key in a) {
         throw new Error([
           `${this.name}#key ${JSON.stringify(e.key)} is duplicate`,
@@ -79,7 +97,10 @@ export default class MemoryRecord {
   }
 
   static get codes_hash() {
-    this._codes_hash = this._codes_hash || _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
+    if (this._codes_hash !== undefined) {
+      return this._codes_hash
+    }
+    this._codes_hash = _.reduce(this.values, (a, e) => { // http://devdocs.io/lodash~4/index#reduce
       if (e.code in a) {
         throw new Error([
           `${this.name}#code ${JSON.stringify(e.code)} is duplicate`,
@@ -94,19 +115,38 @@ export default class MemoryRecord {
   }
 
   static get keys() {
-    this._keys = this._keys || Object.keys(this.keys_hash)
+    if (this._keys !== undefined) {
+      return this._keys
+    }
+    this._keys = Object.keys(this.keys_hash)
     return this._keys
   }
 
   static get codes() {
+    if (this._codes !== undefined) {
+      return this._codes
+    }
+
     // In case of Object.keys(this.codes_hash) code becomes a character string
-    this._codes = this._codes || this.values.map(e => e.code)
+    this._codes = this.values.map(e => e.code)
     return this._codes
   }
 
   static get names() {
-    this._names = this._names || this.values.map(e => e.name)
+    if (this._names !== undefined) {
+      return this._names
+    }
+    this._names = this.values.map(e => e.name)
     return this._names
+  }
+
+  // private
+  static get __source_records() {
+    if (this._records !== undefined) {
+      return this._records
+    }
+    this._records = this.define
+    return this._records
   }
 
   constructor(attributes) {

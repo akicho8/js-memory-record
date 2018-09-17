@@ -19,6 +19,14 @@ class MyModel extends MemoryRecord {
 class EmptyModel extends MemoryRecord {
 }
 
+class MyModel2 extends MemoryRecord {
+  static get define() {
+    return [
+      { key: "a",  name: "name1", },
+    ]
+  }
+}
+
 describe('MemoryRecord', () => {
   it('lookup', () => {
     expect(MyModel.lookup("alice").key).toEqual("alice")
@@ -70,5 +78,10 @@ describe('MemoryRecord', () => {
 
   it('EmptyModel', () => {
     expect(() => { EmptyModel.values }).toThrow()
+  })
+
+  it('memory_record_reset', () => {
+    MyModel2.memory_record_reset([{ key: "a", name: "name2"}])
+    expect(MyModel2.fetch("a").name).toEqual("name2")
   })
 })
