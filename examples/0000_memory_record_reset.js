@@ -1,4 +1,4 @@
-// -*- compile-command: "babel-node 0000_define.js" -*-
+// -*- compile-command: "babel-node 0000_memory_record_reset.js" -*-
 
 import MemoryRecord from '../src/memory_record.js'
 

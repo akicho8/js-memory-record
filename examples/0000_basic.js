@@ -1,4 +1,4 @@
-// -*- compile-command: "babel-node 0000_example.js" -*-
+// -*- compile-command: "babel-node 0000_basic.js" -*-
 
 import MemoryRecord from '../src/memory_record.js'
 
@@ -31,6 +31,4 @@ console.log(Fruit.fetch("apple").key)
 console.log(Fruit.fetch("apple").name)
 console.log(Fruit.fetch("apple").full_name)
 console.log(Fruit.fetch("apple").code)
-
-
-
+console.log(Fruit.fetch("apple") === Fruit.fetch(0))

@@ -93,7 +93,8 @@ Allocate in order from 0.
 Use it when you want to access by special index.
 
 ```js
-Fruit.fetch(0).name             // => "Poison Apple"
+Fruit.fetch(0).name                     // => "Poison Apple"
+Fruit.fetch(0) === Fruit.fetch("apple") // => true
 ```
 
 ### Attributes can be referred to as properties
@@ -175,6 +176,21 @@ Fruit.codes    // => [1, 2, 4]
 This is like managing database ID yourself. We do not recommend it.
 It is only useful if you need consistency with old data.
 
+### How to reset the array of records later
+
+Replace the entire record internally held.
+I do not recommend this method much.
+But it may be useful in emergency.
+
+```js
+Fruit.memory_record_reset([
+  { key: "foo" },
+  { key: "bar" },
+])
+
+Fruit.fetch("foo").key    // => "foo"
+```
+
 ## Build Setup
 
 ```bash
@@ -187,3 +203,4 @@ npm run build
 # run unit tests
 npm test
 ```
+memory_record_reset
