@@ -19,7 +19,7 @@
     "build": "rimraf lib && babel src -d lib --source-maps --no-comments",
     "build:commit": "npm run build && git add -A && git commit -m '[chore] npm run build'",
     "push": "npm test && npm run build:commit && git push",
-    "release": "npm version patch && git push --tags && npm run publish"
+    "release": "npm version patch && git push --tags && npm publish"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
