@@ -11,5 +11,6 @@ class Fruit extends MemoryRecord {
 }
 
 console.log(Fruit.fetch("a").name)
-Fruit.memory_record_reset([{ key: "a",  name: "name2" }])
+const $Fruit = Fruit.memory_record_reset([{ key: "a",  name: "name2" }])
 console.log(Fruit.fetch("a").name)
+console.log($Fruit.values)

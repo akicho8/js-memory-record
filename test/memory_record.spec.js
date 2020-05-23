@@ -81,7 +81,8 @@ describe('MemoryRecord', () => {
   })
 
   it('memory_record_reset', () => {
-    MyModel2.memory_record_reset([{ key: "a", name: "name2"}])
+    const retval = MyModel2.memory_record_reset([{ key: "a", name: "name2"}])
     expect(MyModel2.fetch("a").name).toEqual("name2")
+    expect(retval).toEqual(MyModel2)
   })
 })

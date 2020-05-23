@@ -36,6 +36,8 @@ export default class MemoryRecord {
     this._names      = undefined
 
     this._records = records
+
+    return this
   }
 
   static lookup(key) {
