@@ -1,6 +1,6 @@
 {
   "name": "js-memory-record",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "A simple library that handles a few records easily",
   "keywords": "memory record small library",
   "author": "Akira Ikeda <pinpon.ikeda@gmail.com>",
