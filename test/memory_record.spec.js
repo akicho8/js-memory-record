@@ -56,6 +56,12 @@ describe('MemoryRecord', () => {
     expect(() => { MyModel.fetch("unknown") }).toThrow()
   })
 
+  it('fetch_if', () => {
+    expect(MyModel.fetch_if(null)).toEqual(undefined)
+    expect(MyModel.fetch_if(undefined)).toEqual(undefined)
+    expect(() => { MyModel.fetch_if("") }).toThrow()
+  })
+
   it('values', () => {
     MyModel.values
   })

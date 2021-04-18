@@ -63,6 +63,12 @@ export default class MemoryRecord {
     return element
   }
 
+  static fetch_if(key) {
+    if (key != null) {
+      return this.fetch(key)
+    }
+  }
+
   static get values() {
     if (this._values !== undefined) {
       return this._values
