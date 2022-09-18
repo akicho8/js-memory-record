@@ -145,6 +145,10 @@ export default class MemoryRecord {
     return this._names
   }
 
+  static get count() {
+    return this.values.length
+  }
+
   // private
   static get __source_records() {
     if (this._records != null) {

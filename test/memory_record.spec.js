@@ -52,6 +52,10 @@ describe('MemoryRecord', () => {
     expect(MyModel.names).toEqual(["alice", "bob", "_key2"])
   })
 
+  it('count', () => {
+    expect(MyModel.count).toEqual(3)
+  })
+
   it('fetch', () => {
     expect(() => { MyModel.fetch("unknown") }).toThrow()
   })
