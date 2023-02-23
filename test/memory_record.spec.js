@@ -66,6 +66,10 @@ describe('MemoryRecord', () => {
     expect(() => { MyModel.fetch_if("") }).toThrow()
   })
 
+  it('lookup_or_first', () => {
+    expect(MyModel.lookup_or_first("carol").name).toEqual("alice")
+  })
+
   it('values', () => {
     MyModel.values
   })

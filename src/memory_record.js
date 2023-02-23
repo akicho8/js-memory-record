@@ -88,6 +88,10 @@ export default class MemoryRecord {
     }
   }
 
+  static lookup_or_first(key) {
+    return this.lookup(key) || this.values[0]
+  }
+
   static get values() {
     if (this._values !== undefined) {
       return this._values
