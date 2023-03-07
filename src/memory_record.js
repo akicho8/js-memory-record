@@ -177,7 +177,7 @@ export default class MemoryRecord {
   }
 }
 
-if (process.argv[1] === __filename) {
+if (typeof process !== "undefined" && process.argv[1] === __filename) {
   class Foo extends MemoryRecord {
     static get define() {
       return [
