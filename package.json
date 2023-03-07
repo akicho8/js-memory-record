@@ -7,7 +7,7 @@
   "main": "lib/memory_record.js",
   "private": false,
   "bugs": {
-    "url": "http://github.com/akicho8/js-memory-record/issues",
+    "url": "https://github.com/akicho8/js-memory-record/issues",
     "email": "pinpon.ikeda@gmail.com"
   },
   "repository": {
