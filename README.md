@@ -16,12 +16,6 @@ A simple library that handles a few records easily.
 npm install js-memory-record
 ```
 
-or
-
-```shell
-yarn add js-memory-record
-```
-
 ## Simplest Example
 
 ```js
