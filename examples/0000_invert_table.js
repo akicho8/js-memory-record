@@ -16,7 +16,7 @@ class Fruit extends MemoryRecord {
     if (this._invert_table != null) {
       return this._invert_table
     }
-    this._invert_table = this.memory_record_create_index_or(["name"])
+    this._invert_table = this.memory_record_create_index_by(["name"])
     return this._invert_table
   }
 }

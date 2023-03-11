@@ -40,7 +40,7 @@ export default class MemoryRecord {
     return this
   }
 
-  static memory_record_create_index_or(columns) {
+  static memory_record_create_index_by(columns) {
     return this.values.reduce((a, e) => {
       columns.forEach(column => {
         const v = e[column]
@@ -113,7 +113,7 @@ export default class MemoryRecord {
     if (this._keys_hash != null) {
       return this._keys_hash
     }
-    this._keys_hash = this.memory_record_create_index_or(["key"])
+    this._keys_hash = this.memory_record_create_index_by(["key"])
     return this._keys_hash
   }
 
@@ -121,7 +121,7 @@ export default class MemoryRecord {
     if (this._codes_hash != null) {
       return this._codes_hash
     }
-    this._codes_hash = this.memory_record_create_index_or(["code"])
+    this._codes_hash = this.memory_record_create_index_by(["code"])
     return this._codes_hash
   }
 
