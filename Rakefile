@@ -17,7 +17,6 @@ task :release do
     rake build &&
     git add -A &&
     git commit -m '[chore] npm run build' &&
-    npm run build:commit &&
     npm version patch &&
     git push --tags &&
     npm publish &&
