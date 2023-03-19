@@ -15,7 +15,8 @@ task :release do
   true &&
     jest &&
     rake build &&
-    git add -A || git commit -m '[chore] npm run build' ||
+    git add -A &&
+    git commit -m '[chore] npm run build' --allow-empty &&
     npm version patch &&
     git push --tags &&
     npm publish &&
